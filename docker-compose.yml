@@ -1,6 +1,9 @@
 networks:
   kafka_network:
 #######################################
+volumes:
+  Kafka01:
+#######################################
 services:
  Kafka01Service:
     image: bitnami/kafka:3.5.0-debian-11-r5
@@ -16,6 +19,8 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
     networks:
       - kafka_network
+    volumes:
+      - "Kafka01:/bitnami/kafka"
 ###########################################
  KafkaWebUiService:
    image: provectuslabs/kafka-ui:latest
