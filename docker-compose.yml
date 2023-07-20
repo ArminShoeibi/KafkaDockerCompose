@@ -3,6 +3,7 @@ networks:
 #######################################
 volumes:
   Kafka01:
+    driver: local
 #######################################
 services:
  Kafka01Service:
