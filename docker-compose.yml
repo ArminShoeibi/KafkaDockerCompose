@@ -1,41 +1,42 @@
 networks:
   kafka_network:
-#######################################
+
 volumes:
   Kafka01:
     driver: local
-#######################################
+
 services:
- Kafka01Service:
+  Kafka00Service:
     image: bitnami/kafka:3.5.0-debian-11-r5
     restart: always
-    container_name: Kafka01Container
+    container_name: Kafka00Container
     ports:
       - '9094:9094'
     environment:
       - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=false
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://Kafka01Service:9092,EXTERNAL://127.0.0.1:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://Kafka00Service:9092,EXTERNAL://127.0.0.1:9094
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
     networks:
       - kafka_network
     volumes:
       - "Kafka01:/bitnami/kafka"
-###########################################
- KafkaWebUiService:
-   image: provectuslabs/kafka-ui:latest
-   restart: always
-   container_name: KafkaWebUiContainer
-   ports:
-     - '8080:8080'
-   environment:
-     - KAFKA_CLUSTERS_0_NAME=Kafka-V35
-     - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=Kafka01Service:9092
-     - DYNAMIC_CONFIG_ENABLED=true
-     - KAFKA_CLUSTERS_0_AUDIT_TOPICAUDITENABLED=true
-     - KAFKA_CLUSTERS_0_AUDIT_CONSOLEAUDITENABLED=true
-   depends_on:
-     - Kafka01Service
-   networks:
-     - kafka_network
+  
+  KafkaWebUiService:
+    image: provectuslabs/kafka-ui:latest
+    restart: always
+    container_name: KafkaWebUiContainer
+    ports:
+      - '8080:8080'
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=Kafka-V35
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=Kafka00Service:9092
+      - DYNAMIC_CONFIG_ENABLED=true
+      - KAFKA_CLUSTERS_0_AUDIT_TOPICAUDITENABLED=true
+      - KAFKA_CLUSTERS_0_AUDIT_CONSOLEAUDITENABLED=true
+      #- KAFKA_CLUSTERS_0_METRICS_PORT=9999
+    depends_on:
+      - Kafka00Service
+    networks:
+      - kafka_network
