@@ -7,7 +7,7 @@ volumes:
 
 services:
   Kafka00Service:
-    image: bitnami/kafka:3.5.0-debian-11-r23
+    image: bitnami/kafka:3.5.1-debian-11-r1
     restart: always
     container_name: Kafka00Container
     ports:
