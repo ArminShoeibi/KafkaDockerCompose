@@ -12,7 +12,7 @@ volumes:
 services:
 ##Kafka 00    
   Kafka00Service:
-    image: bitnami/kafka:3.5.1-debian-11-r1
+    image: bitnami/kafka:3.5.1-debian-11-r21
     restart: unless-stopped
     container_name: Kafka00Container
     ports:
@@ -30,13 +30,15 @@ services:
       - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 # https://cwiki.apache.org/confluence/display/KAFKA/KIP-115%3A+Enforce+offsets.topic.replication.factor+upon+__consumer_offsets+auto+topic+creation
       - KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3
       - KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
     networks:
       - kafka_network
     volumes:
       - "Kafka00:/bitnami/kafka"
 ##Kafka 01
   Kafka01Service:
-    image: bitnami/kafka:3.5.0-debian-11-r23
+    image: bitnami/kafka:3.5.1-debian-11-r21
     restart: always
     container_name: Kafka01Container
     ports:
@@ -54,13 +56,15 @@ services:
       - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 # https://cwiki.apache.org/confluence/display/KAFKA/KIP-115%3A+Enforce+offsets.topic.replication.factor+upon+__consumer_offsets+auto+topic+creation
       - KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3
       - KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
     networks:
       - kafka_network
     volumes:
       - "Kafka01:/bitnami/kafka"
 ##Kafka 02
   Kafka02Service:
-    image: bitnami/kafka:3.5.0-debian-11-r23
+    image: bitnami/kafka:3.5.1-debian-11-r21
     restart: always
     container_name: Kafka02Container
     ports:
@@ -78,6 +82,8 @@ services:
       - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 # https://cwiki.apache.org/confluence/display/KAFKA/KIP-115%3A+Enforce+offsets.topic.replication.factor+upon+__consumer_offsets+auto+topic+creation
       - KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3
       - KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
     networks:
       - kafka_network
     volumes:
