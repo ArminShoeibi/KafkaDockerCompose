@@ -12,7 +12,7 @@ volumes:
 services:
 ##Kafka 00    
   Kafka00Service:
-    image: bitnami/kafka:3.5.1-debian-11-r21
+    image: bitnami/kafka:3.5.1-debian-11-r44
     restart: unless-stopped
     container_name: Kafka00Container
     ports:
@@ -38,7 +38,7 @@ services:
       - "Kafka00:/bitnami/kafka"
 ##Kafka 01
   Kafka01Service:
-    image: bitnami/kafka:3.5.1-debian-11-r21
+    image: bitnami/kafka:3.5.1-debian-11-r44
     restart: always
     container_name: Kafka01Container
     ports:
@@ -64,7 +64,7 @@ services:
       - "Kafka01:/bitnami/kafka"
 ##Kafka 02
   Kafka02Service:
-    image: bitnami/kafka:3.5.1-debian-11-r21
+    image: bitnami/kafka:3.5.1-debian-11-r44
     restart: always
     container_name: Kafka02Container
     ports:
