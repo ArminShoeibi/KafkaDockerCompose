@@ -39,7 +39,7 @@ services:
 ##Kafka 01
   Kafka01Service:
     image: bitnami/kafka:3.5.1-debian-11-r72
-    restart: always
+    restart: unless-stopped
     container_name: Kafka01Container
     ports:
       - '10001:9094'
@@ -65,7 +65,7 @@ services:
 ##Kafka 02
   Kafka02Service:
     image: bitnami/kafka:3.5.1-debian-11-r72
-    restart: always
+    restart: unless-stopped
     container_name: Kafka02Container
     ports:
       - '10002:9094'
@@ -91,7 +91,7 @@ services:
       
   KafkaWebUiService:
     image: provectuslabs/kafka-ui:latest
-    restart: always
+    restart: unless-stopped
     container_name: KafkaWebUiContainer
     ports:
       - '8080:8080'
