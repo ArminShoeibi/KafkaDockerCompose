@@ -102,9 +102,5 @@ services:
       - KAFKA_CLUSTERS_0_AUDIT_TOPICAUDITENABLED=true
       - KAFKA_CLUSTERS_0_AUDIT_CONSOLEAUDITENABLED=true
       #- KAFKA_CLUSTERS_0_METRICS_PORT=9999
-    depends_on:
-      - Kafka00Service
-      - Kafka01Service
-      - Kafka02Service
     networks:
       - kafka_network
