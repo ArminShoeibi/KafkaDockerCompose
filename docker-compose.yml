@@ -2,7 +2,7 @@ networks:
   kafka_network:
 
 volumes:
-  Kafka00:
+  Kafka00_Standalone:
     driver: local
 
 services:
@@ -27,7 +27,7 @@ services:
     networks:
       - kafka_network
     volumes:
-      - "Kafka00:/bitnami/kafka"
+      - "Kafka00_Standalone:/bitnami/kafka"
   
   KafkaWebUiService:
     image: provectuslabs/kafka-ui:latest
