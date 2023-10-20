@@ -12,7 +12,7 @@ volumes:
 services:
 ##Kafka 00    
   Kafka00Service:
-    image: bitnami/kafka:3.5.1-debian-11-r44
+    image: bitnami/kafka:3.5.1-debian-11-r72
     restart: unless-stopped
     container_name: Kafka00Container
     ports:
@@ -38,8 +38,8 @@ services:
       - "Kafka00:/bitnami/kafka"
 ##Kafka 01
   Kafka01Service:
-    image: bitnami/kafka:3.5.1-debian-11-r44
-    restart: always
+    image: bitnami/kafka:3.5.1-debian-11-r72
+    restart: unless-stopped
     container_name: Kafka01Container
     ports:
       - '10001:9094'
@@ -64,8 +64,8 @@ services:
       - "Kafka01:/bitnami/kafka"
 ##Kafka 02
   Kafka02Service:
-    image: bitnami/kafka:3.5.1-debian-11-r44
-    restart: always
+    image: bitnami/kafka:3.5.1-debian-11-r72
+    restart: unless-stopped
     container_name: Kafka02Container
     ports:
       - '10002:9094'
@@ -91,7 +91,7 @@ services:
       
   KafkaWebUiService:
     image: provectuslabs/kafka-ui:latest
-    restart: always
+    restart: unless-stopped
     container_name: KafkaWebUiContainer
     ports:
       - '8080:8080'
@@ -102,9 +102,5 @@ services:
       - KAFKA_CLUSTERS_0_AUDIT_TOPICAUDITENABLED=true
       - KAFKA_CLUSTERS_0_AUDIT_CONSOLEAUDITENABLED=true
       #- KAFKA_CLUSTERS_0_METRICS_PORT=9999
-    depends_on:
-      - Kafka00Service
-      - Kafka01Service
-      - Kafka02Service
     networks:
       - kafka_network
