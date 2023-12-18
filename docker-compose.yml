@@ -7,7 +7,7 @@ volumes:
 
 services:
   Kafka00Service:
-    image: bitnami/kafka:3.5.1-debian-11-r72
+    image: bitnami/kafka:3.6.1-debian-11-r0
     restart: always
     container_name: Kafka00Container
     ports:
@@ -30,18 +30,18 @@ services:
     volumes:
       - "Kafka00_Standalone:/bitnami/kafka"
   
-  KafkaWebUiService:
-    image: provectuslabs/kafka-ui:latest
-    restart: always
-    container_name: KafkaWebUiContainer
-    ports:
-      - '8080:8080'
-    environment:
-      - KAFKA_CLUSTERS_0_NAME=Kafka-V35
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=Kafka00Service:9092
-      - DYNAMIC_CONFIG_ENABLED=true
-      - KAFKA_CLUSTERS_0_AUDIT_TOPICAUDITENABLED=true
-      - KAFKA_CLUSTERS_0_AUDIT_CONSOLEAUDITENABLED=true
-      #- KAFKA_CLUSTERS_0_METRICS_PORT=9999
-    networks:
-      - kafka_network
+#  KafkaWebUiService:
+#    image: provectuslabs/kafka-ui:latest
+#    restart: always
+#    container_name: KafkaWebUiContainer
+#    ports:
+#      - '8080:8080'
+#    environment:
+#      - KAFKA_CLUSTERS_0_NAME=Kafka-V35
+#      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=Kafka00Service:9092
+#      - DYNAMIC_CONFIG_ENABLED=true
+#      - KAFKA_CLUSTERS_0_AUDIT_TOPICAUDITENABLED=true
+#      - KAFKA_CLUSTERS_0_AUDIT_CONSOLEAUDITENABLED=true
+#      #- KAFKA_CLUSTERS_0_METRICS_PORT=9999
+#    networks:
+#      - kafka_network
